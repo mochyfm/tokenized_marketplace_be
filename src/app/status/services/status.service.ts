@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Router, Request as ExpressRequest } from 'express';
-import { XMLService } from 'src/utils/XML.tools';
+import { XMLService } from 'src/utils/xml.tools';
 
 @Injectable()
 export class StatusService {

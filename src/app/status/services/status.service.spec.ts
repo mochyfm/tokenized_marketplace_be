@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vitest } from 'vitest';
 import { StatusService } from './status.service';
 import { Router, Request } from 'express';
-import { XMLService } from 'src/utils/XML.tools';
+import { XMLService } from 'src/utils/xml.tools';
 import { StatusController } from '../controllers/status.controller';
 
 /**

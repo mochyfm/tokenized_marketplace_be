@@ -1,6 +1,6 @@
 import * as fs from 'fs';
-import { BKND_CONSTANTS } from '../constants/constants.backend';
-import * as crypto from 'crypto';
+import { BKND_CONSTANTS } from '../constants/backend.constants';
+import * as crypto from 'node:crypto';
 
 /**
  * Ensure JWT_SECRET is present in the .env file, adding it if necessary.

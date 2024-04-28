@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest';
-import { AuthCredentialsDto } from './auth.dto';
+import { AccessTokenDto } from './access-token.dto';
 
 describe('AuthDto', () => {
   it('should be defined', () => {
-    expect(AuthCredentialsDto).toBeDefined();
+    expect(new AccessTokenDto()).toBeDefined();
   });
 });
