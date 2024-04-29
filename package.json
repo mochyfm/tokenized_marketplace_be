@@ -21,11 +21,12 @@
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
+    "@nestjs/config": "^3.2.2",
     "@nestjs/core": "^10.0.0",
+    "@nestjs/jwt": "^10.2.0",
     "@nestjs/platform-express": "^10.0.0",
-    "@nestjs/swagger": "^7.3.1",
     "axios": "^1.6.8",
-    "express-xml-bodyparser": "^0.3.0",
+    "express-basic-auth": "^1.2.1",
     "fast-xml-parser": "^4.3.6",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1"
@@ -33,6 +34,7 @@
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
     "@nestjs/schematics": "^10.0.0",
+    "@nestjs/swagger": "^7.3.1",
     "@nestjs/testing": "^10.0.0",
     "@swc/cli": "^0.3.12",
     "@swc/core": "^1.5.0",

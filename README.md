@@ -1,73 +1,71 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Idiomas:
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+- [Español](docs/Es-es/README-es.md)
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Tokenized Marketplace Demo
 
-## Description
+This document deals with the structure followed for the creation of a demo related to task T4.4 of the European project EnPower. The _Grant Agreement_ should be consulted to understand what is requested.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Following this, the backend shapes a structure that constitutes the entire application. This documentation is divided into two substantial components: the first is this text document, and the second is a schema created in [Escalidraw](./docs/diagram.excalidraw), where all the application modules are detailed, as well as their functions, controllers, and more. This document describes the functioning of each element, along with an explanation of its functionality. In case of preferring a visual representation, it would be ideal to consult directly the mentioned schema.
 
-## Installation
+## Dependencies
 
-```bash
-$ npm install
-```
+The application dependencies can be seen from the `package.json` of this project: [package.json](package.json). In summary, the most substantial dependencies with their versions are as follows:
 
-## Running the app
+- Axios
+- DotEnv
+- Eslint
+- Fast-xml-parser
+- Prettier
+- SuperTest
+- SWC
+- Vitest (with unplugin-swc)
 
-```bash
-# development
-$ npm run start
+Additionally, due not only to the working structure followed by NestJS, TypeScript has been chosen for the entire project except for some exceptions in which JS is used.
 
-# watch mode
-$ npm run start:dev
+## Folder Structure
 
-# production mode
-$ npm run start:prod
-```
+The project is divided into folders, according to functionality. Below is a definition by elements:
 
-## Test
+| Folder      | Description                                                                              |
+| ----------- | ---------------------------------------------------------------------------------------- |
+| app         | Main folder of the application, where all module logic is managed                        |
+| config      | Folder related to the specific configuration of the modules                              |
+| constants   | Folder of constants of the application, including environment variables                  |
+| decorators  | Folder of custom decorators                                                              |
+| middlewares | Folder for middleware logic                                                              |
+| types       | Folder of types for TypeScript                                                           |
+| utils       | Folder where all utility functions are stored (Json to XML conversion, encryption, etc.) |
 
-```bash
-# unit tests
-$ npm run test
+## Project Structure
 
-# e2e tests
-$ npm run test:e2e
+To understand the structure of the project, we must first understand the components that structure it. In Nest, the operation is similar to that of Angular, each element is a Module and from there each of them has its independent structure.
 
-# test coverage
-$ npm run test:cov
-```
+| Parent    | Child            |
+| --------- | ---------------- |
+| AppModule | AuthModule       |
+|           | BlockchainModule |
+|           | UsersModule      |
+|           | StorageModule    |
+|           | StatusModule     |
 
-## Support
+Here all independent modules will be reflected. To see the complete structure, go to the diagram.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- AuthModule: Authentication module. It contains all the rules and endpoints necessary for the use of the application.
+- BlockchainModule: Module for interacting with the blockchain, any communication to be made with the blockchain must be done from here.
+- UsersModule: Management (CRUD) module of users.
+- StorageModule: Module for management and interaction with the storage system.
+- StatusModule: Module for representing the state of the web application.
 
-## Stay in touch
+## Structure for each Module
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Each module follows a structure, having (or not) the following subfolders and files:
 
-## License
+| Folder     | Description                                                   |
+| ---------- | ------------------------------------------------------------- |
+| controller | Folder for managing REST controllers                          |
+| service    | Folder for services of that specific module and related to it |
+| dto        | Folder for concentrating the DTOs of the module               |
+| entity     | Folder for entity management                                  |
 
-Nest is [MIT licensed](LICENSE).
+Within each one, there will be the mentioned elements and **a test file must always be with it**. Tests are performed with vitest.

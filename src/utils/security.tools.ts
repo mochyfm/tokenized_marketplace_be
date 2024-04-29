@@ -1,19 +1,24 @@
 import * as fs from 'fs';
-import { BKND_CONSTANTS } from '../constants/backend.constants';
 import * as crypto from 'node:crypto';
+import { BKND_CONSTANTS } from '../constants/backend.constants';
+import { JWT_CONSTANTS } from 'src/constants/security.constants';
 
 /**
  * Ensure JWT_SECRET is present in the .env file, adding it if necessary.
+ *
+ * @param secretKeySize The size of the secret key to generate, in bytes. Default is 32.
  */
-export function ensureJwtSecretInEnv(secretKeySize: number = 32) {
+export function ensureJwtSecretInEnv(secretKeySize: number = 32): void {
   // Generates the Secret Key for the application usage
-  const generateSecretKey = () =>
+  const generateSecretKey = (): string =>
     crypto.randomBytes(secretKeySize).toString('hex');
 
   // Check if the .env file exists and if it already contains JWT_SECRET
   if (
     !fs.existsSync(BKND_CONSTANTS.envFilePath) ||
-    !fs.readFileSync(BKND_CONSTANTS.envFilePath, 'utf-8').includes('JWT_SECRET')
+    !fs
+      .readFileSync(BKND_CONSTANTS.envFilePath, 'utf-8')
+      .includes(JWT_CONSTANTS.jwtSecretEnvVariable)
   ) {
     // Generate a secret key
     const secretKey = generateSecretKey();
@@ -32,9 +37,10 @@ export function ensureJwtSecretInEnv(secretKeySize: number = 32) {
     }
 
     // Append JWT_SECRET to the .env file
-    fs.appendFileSync(BKND_CONSTANTS.envFilePath, `JWT_SECRET=${secretKey}\n`);
+    fs.appendFileSync(
+      BKND_CONSTANTS.envFilePath,
+      `${JWT_CONSTANTS.jwtSecretEnvVariable}=${secretKey}\n`,
+    );
     console.log('Secret key generated and appended to the .env file.');
   }
 }
-
-// Call the function to ensure JWT_SECRET is present in the .env file

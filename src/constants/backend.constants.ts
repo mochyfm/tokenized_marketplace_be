@@ -1,23 +1,16 @@
-import * as dotenv from 'dotenv';
+import { config } from 'dotenv';
 
-// Load environment variables from the .env file
-dotenv.config();
+config();
 
 /**
  * Constants for the backend.
  */
 export const BKND_CONSTANTS = {
   /**
-   * Swagger endpoint.
-   * If not provided in the environment variables, 'swagger-dev' is used as the default value.
-   */
-  swaggerEndpoint: `${process.env.SWAGGER_ENDPOINT}` || 'swagger-dev',
-
-  /**
    * Backend IP address.
    * If not provided in the environment variables, '127.0.0.1' is used as the default value.
    */
-  backendIp: `${process.env.BACKEND_IP}` || '127.0.0.1',
+  backendIp: process.env.BACKEND_IP || '127.0.0.1',
 
   /**
    * Backend port.
@@ -28,6 +21,18 @@ export const BKND_CONSTANTS = {
   /**
    * Backend .env file path
    * This is the path to the .env file
+   * If not provided, defaults to the root directory ('.env' file in the same directory as the script).
    */
-  envFilePath: '.env',
+  envFilePath: process.env.ENV_FILE || '.env',
+
+  /**
+   * Swagger endpoint.
+   * If not provided in the environment variables, 'swagger-dev' is used as the default value.
+   */
+  swaggerEndpoint: process.env.SWAGGER_ENDPOINT || 'swagger-dev',
+
+  /**
+   * Excluded routes for the Authentication Middleware.
+   */
+  excludedRoutes: ['/health', '/status'],
 };
