@@ -1,16 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { EthereumController } from './ethereum.controller';
+import { RpcController } from './rpc.controller';
 import { beforeEach, it, expect, describe } from 'vitest';
 
 describe('EthereumController', () => {
-  let controller: EthereumController;
+  let controller: RpcController;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [EthereumController],
+      controllers: [RpcController],
     }).compile();
 
-    controller = module.get<EthereumController>(EthereumController);
+    controller = module.get<RpcController>(RpcController);
   });
 
   it('should be defined', () => {

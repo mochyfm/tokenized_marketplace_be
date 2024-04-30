@@ -18,8 +18,8 @@ import { JWT_CONSTANTS } from 'src/constants/security.constants';
 @Module({
   imports: [
     JwtModule.register({
-      secret: JWT_CONSTANTS.jwtSecretEnvVariable,
-      signOptions: { expiresIn: JWT_CONSTANTS.expirationTime * 1000 },
+      secret: JWT_CONSTANTS.secretKey,
+      signOptions: { expiresIn: JWT_CONSTANTS.expirationTime },
     }),
     AuthModule,
     BlockchainModule,

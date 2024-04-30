@@ -16,4 +16,9 @@ export const JWT_CONSTANTS = {
    * Environment attribute name for JWT secret.
    */
   jwtSecretEnvVariable: 'JWT_SECRET',
+
+  /**
+   * JWT SecretKey value
+   */
+  secretKey: process.env.JWT_SECRET,
 };

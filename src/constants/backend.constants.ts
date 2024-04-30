@@ -3,7 +3,7 @@ import { config } from 'dotenv';
 config();
 
 /**
- * Constants for the backend.
+ * Constants related to the global backend.
  */
 export const BKND_CONSTANTS = {
   /**
@@ -26,6 +26,12 @@ export const BKND_CONSTANTS = {
   envFilePath: process.env.ENV_FILE || '.env',
 
   /**
+   * Swagger state.
+   * Enables or not swagger. If not provided the swagger will be by default disabled.
+   */
+  swagger: process.env.SWAGGER === 'true' || false,
+
+  /**
    * Swagger endpoint.
    * If not provided in the environment variables, 'swagger-dev' is used as the default value.
    */
@@ -34,5 +40,5 @@ export const BKND_CONSTANTS = {
   /**
    * Excluded routes for the Authentication Middleware.
    */
-  excludedRoutes: ['/health', '/status'],
+  excludedRoutes: ['/health'],
 };

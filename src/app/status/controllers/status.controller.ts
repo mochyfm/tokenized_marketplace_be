@@ -1,5 +1,4 @@
-import { Controller, Get, Header, Request } from '@nestjs/common';
-import { Request as ExpressRequest } from 'express';
+import { Controller, Get, Header } from '@nestjs/common';
 import { StatusService } from '../services/status.service';
 import { ApiTags } from '@nestjs/swagger';
 
@@ -24,16 +23,5 @@ export class StatusController {
   @Header('Content-Type', 'application/xml')
   checkHealth() {
     return this.statusService.parseToXML({ health: 'ok' });
-  }
-
-  /**
-   * Handles the 'status' endpoint GET request.
-   * Returns endpoints status.
-   * @param req The ExpressRequest object.
-   * @returns Endpoints status.
-   */
-  @Get('status')
-  checkStatus(@Request() req: ExpressRequest) {
-    return this.statusService.getEndpoints(req);
   }
 }

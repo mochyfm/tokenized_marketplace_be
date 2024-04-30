@@ -41,6 +41,5 @@ export function ensureJwtSecretInEnv(secretKeySize: number = 32): void {
       BKND_CONSTANTS.envFilePath,
       `${JWT_CONSTANTS.jwtSecretEnvVariable}=${secretKey}\n`,
     );
-    console.log('Secret key generated and appended to the .env file.');
   }
 }

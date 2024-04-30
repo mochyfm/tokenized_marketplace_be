@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { EthereumController } from './controllers/ethereum.controller';
-import { EthereumService } from './services/ethereum.service';
+import { RpcController } from './controllers/rpc.controller';
+import { RpcService } from './services/rpc.service';
 
 @Module({
-  controllers: [EthereumController],
-  providers: [EthereumService],
+  controllers: [RpcController],
+  providers: [RpcService],
   imports: [],
 })
 export class BlockchainModule {}
