@@ -14,6 +14,8 @@ import { JwtModule } from '@nestjs/jwt';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { BKND_CONSTANTS } from 'src/constants/backend.constants';
 import { JWT_CONSTANTS } from 'src/constants/security.constants';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { STORG_CONSTANTS } from 'src/constants/storage.constants';
 
 @Module({
   imports: [
@@ -21,6 +23,8 @@ import { JWT_CONSTANTS } from 'src/constants/security.constants';
       secret: JWT_CONSTANTS.secretKey,
       signOptions: { expiresIn: JWT_CONSTANTS.expirationTime },
     }),
+    TypeOrmModule.forRoot(STORG_CONSTANTS.typeOrmOptions),
+    TypeOrmModule.forFeature([]),
     AuthModule,
     BlockchainModule,
     UsersModule,
