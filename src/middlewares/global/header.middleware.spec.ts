@@ -5,32 +5,32 @@ import { afterEach, beforeEach, describe, it } from 'vitest';
 import { AppModule } from 'src/app/app.module';
 
 /**
- * Pruebas para el middleware de encabezados personalizados.
+ * Tests for the custom headers middleware.
  */
 describe('HeaderMiddleware', () => {
   let app: INestApplication;
 
-  // Configura la aplicación NestJS antes de cada prueba
+  // Set up the NestJS application before each test
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule], // Importa tu módulo de aplicación
+      imports: [AppModule], // Import your application module
     }).compile();
 
     app = moduleFixture.createNestApplication();
     await app.init();
   });
 
-  // Cierra la aplicación después de cada prueba
+  // Close the application after each test
   afterEach(async () => {
     await app.close();
   });
 
-  // Prueba que se agregue el header X-Version a la respuesta
+  // Test that the X-Version header is added to the response
   it('should add X-Version header to response', async () => {
-    await request(app.getHttpServer()).get('/').expect('X-Version', /./); // Verifica si el encabezado existe, independientemente de su valor
+    await request(app.getHttpServer()).get('/').expect('X-Version', /./); // Verify if the header exists, regardless of its value
   });
 
-  // Prueba que se elimine el header x-powered-by de la respuesta
+  // Test that the x-powered-by header is removed from the response
   it('should remove x-powered-by header from response', async () => {
     await request(app.getHttpServer())
       .get('/')
