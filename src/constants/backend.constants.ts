@@ -40,5 +40,5 @@ export const BKND_CONSTANTS = {
   /**
    * Excluded routes for the Authentication Middleware.
    */
-  excludedRoutes: ['/health'],
+  excludedRoutes: ['/health', '/rpc/info'],
 };

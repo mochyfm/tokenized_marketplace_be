@@ -9,13 +9,12 @@ import { BlockchainModule } from './blockchain/blockchain.module';
 import { UsersModule } from './users/users.module';
 import { StorageModule } from './storage/storage.module';
 import { StatusModule } from './status/status.module';
-import { AuthMiddleware } from 'src/middlewares/auth/auth.middleware';
+import { AuthMiddleware } from 'src/middlewares/global/auth/auth.middleware';
 import { JwtModule } from '@nestjs/jwt';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { BKND_CONSTANTS } from 'src/constants/backend.constants';
 import { JWT_CONSTANTS } from 'src/constants/security.constants';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { STORG_CONSTANTS } from 'src/constants/storage.constants';
+import { HeaderMiddleware } from 'src/middlewares/global/header.middleware';
 
 @Module({
   imports: [
@@ -23,8 +22,6 @@ import { STORG_CONSTANTS } from 'src/constants/storage.constants';
       secret: JWT_CONSTANTS.secretKey,
       signOptions: { expiresIn: JWT_CONSTANTS.expirationTime },
     }),
-    TypeOrmModule.forRoot(STORG_CONSTANTS.typeOrmOptions),
-    TypeOrmModule.forFeature([]),
     AuthModule,
     BlockchainModule,
     UsersModule,
@@ -40,6 +37,7 @@ export class AppModule {
    * @param consumer The middleware consumer to configure middleware for the application.
    */
   configure(consumer: MiddlewareConsumer): void {
+    consumer.apply(HeaderMiddleware).forRoutes('*');
     consumer
       .apply(AuthMiddleware)
       .exclude(BKND_CONSTANTS.swaggerEndpoint) // Excludes the Swagger endpoint from authentication
