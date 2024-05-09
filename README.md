@@ -46,7 +46,7 @@ To understand the structure of the project, we must first understand the compone
 | AppModule | AuthModule       |
 |           | BlockchainModule |
 |           | UsersModule      |
-|           | StorageModule    |
+|           | DatabaseModule   |
 |           | StatusModule     |
 
 Here all independent modules will be reflected. To see the complete structure, go to the diagram.
@@ -54,7 +54,7 @@ Here all independent modules will be reflected. To see the complete structure, g
 - AuthModule: Authentication module. It contains all the rules and endpoints necessary for the use of the application.
 - BlockchainModule: Module for interacting with the blockchain, any communication to be made with the blockchain must be done from here.
 - UsersModule: Management (CRUD) module of users.
-- StorageModule: Module for management and interaction with the storage system.
+- DatabaseModule: Module for management and interaction with the database system.
 - StatusModule: Module for representing the state of the web application.
 
 ## Structure for each Module

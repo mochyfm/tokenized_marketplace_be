@@ -1,16 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { XMLService } from 'src/utils/xml.tools';
+import { UtilsService } from '../../../utils/utils.service';
 
 @Injectable()
 export class StatusService {
-  constructor(private readonly xmlService: XMLService) {}
+  constructor(private readonly utilsService: UtilsService) {}
 
-  /**
-   * Parses the given content to XML format.
-   * @param content The content to be parsed to XML.
-   * @returns The XML representation of the content.
-   */
-  parseToXML(content: any) {
-    return this.xmlService.objectToXml(content);
+  getStatus() {
+    return this.utilsService.objectToXml({ health: 'ok' });
   }
 }

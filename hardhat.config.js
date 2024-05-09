@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-import '@nomicfoundation/hardhat-ignition-ethers';
-
 module.exports = {
   solidity: '0.8.24',
   networks: {

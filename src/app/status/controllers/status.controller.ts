@@ -22,6 +22,6 @@ export class StatusController {
   @Get('health')
   @Header('Content-Type', 'application/xml')
   checkHealth() {
-    return this.statusService.parseToXML({ health: 'ok' });
+    return this.statusService.getStatus();
   }
 }

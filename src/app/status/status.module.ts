@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { StatusController } from './controllers/status.controller';
 import { StatusService } from './services/status.service';
-import { XMLService } from 'src/utils/xml.tools';
+import { UtilsService } from 'src/utils/utils.service';
 
 @Module({
   controllers: [StatusController],
-  providers: [StatusService, XMLService],
+  providers: [StatusService, UtilsService],
 })
 export class StatusModule {}

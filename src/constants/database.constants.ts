@@ -6,12 +6,12 @@ config();
 /**
  * Constants related to storage configuration.
  */
-export const STORG_CONSTANTS = {
+export const DATABSE_CONSTANTS = {
   /**
-   * Hostname of the MongoDB server. (Default: localhost)
-   * Example in .env: HOST=your_host
+   * Hostname of the database server. (Default: localhost)
+   * Example in .env: DB_HOST=your_host
    */
-  host: process.env.STORAGE_HOST || 'localhost',
+  host: process.env.DB_HOST || 'localhost',
 
   /**
    * Name of the element to connect to, meaning this a database, table... (Default: tokenized_marketplace)
@@ -20,9 +20,9 @@ export const STORG_CONSTANTS = {
 
   /**
    * Port of the MongoDB container. (Default: 27017)
-   * Example in .env: CONTAINER_PORT=27017
+   * Example in .env: DB_PORT=27017
    */
-  port: parseInt(process.env.STORAGE_PORT, 10) || 27017,
+  port: parseInt(process.env.DB_PORT, 10) || 27017,
 
   /**
    * Username for authentication. (Default: enpower)

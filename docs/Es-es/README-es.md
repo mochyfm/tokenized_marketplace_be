@@ -48,7 +48,7 @@ Para entender la estructura del proyecto deberemos primero entender los componen
 | AppModule | AuthModule       |
 |           | BlockchainModule |
 |           | UsersModule      |
-|           | StorageModule    |
+|           | DatabaseModule   |
 |           | StatusModule     |
 
 Aquí se reflejarán todos los módulos independientes. Para ver la estructura completa, ve al diagrama.

@@ -2,8 +2,8 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 import { BKND_CONSTANTS } from './constants/backend.constants';
 import { Logger } from '@nestjs/common';
-import { ensureJwtSecretInEnv } from './utils/security.tools';
 import { config } from 'dotenv';
+import { ensureJwtSecretInEnv } from './utils/security.tools';
 
 config();
 ensureJwtSecretInEnv();

@@ -1,20 +1,7 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.15;
+pragma solidity 0.8.20;
 
-interface ERC20 {
-    function transferFrom(
-        address sender,
-        address recipient,
-        uint256 amount
-    ) external returns (bool);
-
-    function transfer(
-        address recipient,
-        uint256 amount
-    ) external returns (bool);
-
-    function balanceOf(address owner) external view returns (uint256);
-}
+import "./MarketToken.sol";
 
 contract Marketplace {
     struct Purchase {
@@ -41,29 +28,24 @@ contract Marketplace {
 
     uint256 public nextOfferId;
     uint256 public nextPurchaseId;
-    ERC20 public token;
+    MarketToken public token;
 
     modifier onlyRole(UserRole _role) {
-        require(userRoles[msg.sender] == _role, 'Unauthorized');
+        require(userRoles[msg.sender] == _role, "Unauthorized");
         _;
     }
 
     constructor(address _tokenAddress) {
-        token = ERC20(_tokenAddress);
+        token = MarketToken(_tokenAddress);
         userRoles[msg.sender] = UserRole.Admin;
         nextOfferId = 0;
         nextPurchaseId = 0;
     }
 
-    function isValidCID(string memory _cid) internal pure returns (bool) {
-        return bytes(_cid).length == 46;
-    }
-
-    function createOffer(
-        string memory _offerCID,
-        uint256 _price
-    ) external onlyRole(UserRole.Seller) {
-        require(isValidCID(_offerCID), 'Invalid CID');
+    function createOffer(string memory _offerCID, uint256 _price)
+        external
+        onlyRole(UserRole.Seller)
+    {
         offers[nextOfferId] = Offer(_offerCID, msg.sender, _price);
         nextOfferId++;
     }
@@ -73,7 +55,6 @@ contract Marketplace {
         string memory _offerCID,
         uint256 _newPrice
     ) external onlyRole(UserRole.Seller) {
-        require(isValidCID(_offerCID), 'Invalid CID');
         Offer storage offer = offers[_offerId];
         offer.offerCID = _offerCID;
         offer.price = _newPrice;
@@ -83,16 +64,16 @@ contract Marketplace {
         Offer storage offer = offers[_offerId];
         require(
             token.transferFrom(msg.sender, offer.seller, offer.price),
-            'Failed to transfer tokens'
+            "Failed to transfer tokens"
         );
         uint256 purchaseId = nextPurchaseId++;
         purchases[purchaseId] = Purchase(offer.offerCID, msg.sender, false);
     }
 
-    function setUserRole(
-        address _user,
-        UserRole _role
-    ) external onlyRole(UserRole.Admin) {
+    function setUserRole(address _user, UserRole _role)
+        external
+        onlyRole(UserRole.Admin)
+    {
         userRoles[_user] = _role;
     }
 
@@ -100,11 +81,11 @@ contract Marketplace {
         Purchase storage purchase = purchases[_purchaseId];
         require(
             purchase.buyer == msg.sender,
-            'You are not the buyer of this purchase'
+            "You are not the buyer of this purchase"
         );
-        require(!purchase.refunded, 'This purchase has already been refunded');
+        require(!purchase.refunded, "This purchase has already been refunded");
         uint256 refundAmount = token.balanceOf(address(this));
-        require(token.transfer(purchase.buyer, refundAmount), 'Refund failed');
+        require(token.transfer(purchase.buyer, refundAmount), "Refund failed");
         purchase.refunded = true;
     }
 
@@ -112,12 +93,20 @@ contract Marketplace {
         Purchase storage purchase = purchases[_purchaseId];
         require(
             purchase.buyer == msg.sender,
-            'You are not the buyer of this purchase'
+            "You are not the buyer of this purchase"
         );
-        require(!purchase.refunded, 'This purchase has been refunded');
+        require(!purchase.refunded, "This purchase has been refunded");
         require(
             token.transferFrom(msg.sender, address(this), _amount),
-            'Token transfer failed'
+            "Token transfer failed"
         );
+    }
+
+    function getUserTokenBalance(address _user)
+        external
+        view
+        returns (uint256)
+    {
+        return token.balanceOf(_user);
     }
 }

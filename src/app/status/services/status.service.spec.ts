@@ -1,14 +1,14 @@
 import { describe, expect, it, vitest } from 'vitest';
 import { StatusService } from './status.service';
-import { XMLService } from 'src/utils/xml.tools';
 import { StatusController } from '../controllers/status.controller';
+import { UtilsService } from 'src/utils/utils.service';
 
 /**
  * Test suite for the StatusService class.
  */
 describe('StatusService', () => {
-  const xmlService: XMLService = new XMLService();
-  const statusService: StatusService = new StatusService(xmlService);
+  const utilsService: UtilsService = new UtilsService();
+  const statusService: StatusService = new StatusService(utilsService);
 
   /**
    * Test case to verify the behavior of the checkHealth method in the StatusController.
@@ -16,7 +16,7 @@ describe('StatusService', () => {
   it('should return a XML output with ok status for health check', async () => {
     // Mock the XMLService.objectToXml method
     const parseToXMLSpy = vitest
-      .spyOn(xmlService, 'objectToXml')
+      .spyOn(utilsService, 'objectToXml')
       .mockReturnValue('<health>ok</health>');
 
     // Create an instance of StatusController

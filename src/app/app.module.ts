@@ -7,7 +7,7 @@ import {
 import { AuthModule } from './auth/auth.module';
 import { BlockchainModule } from './blockchain/blockchain.module';
 import { UsersModule } from './users/users.module';
-import { StorageModule } from './storage/storage.module';
+import { DatabaseModule } from './database/database.module';
 import { StatusModule } from './status/status.module';
 import { AuthMiddleware } from 'src/middlewares/global/auth/auth.middleware';
 import { JwtModule } from '@nestjs/jwt';
@@ -15,6 +15,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { BKND_CONSTANTS } from 'src/constants/backend.constants';
 import { JWT_CONSTANTS } from 'src/constants/security.constants';
 import { HeaderMiddleware } from 'src/middlewares/global/header.middleware';
+import { UtilsModule } from 'src/utils/utils.module';
 
 @Module({
   imports: [
@@ -25,8 +26,9 @@ import { HeaderMiddleware } from 'src/middlewares/global/header.middleware';
     AuthModule,
     BlockchainModule,
     UsersModule,
-    StorageModule,
+    DatabaseModule,
     StatusModule,
+    UtilsModule,
     SwaggerModule,
   ],
 })
@@ -34,7 +36,7 @@ export class AppModule {
   /**
    * Configures middleware for the application.
    *
-   * @param consumer The middleware consumer to configure middleware for the application.
+   * @param consumer The middleware consumer to configure the middlewares for the application.
    */
   configure(consumer: MiddlewareConsumer): void {
     consumer.apply(HeaderMiddleware).forRoutes('*');
