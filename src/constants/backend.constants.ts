@@ -23,7 +23,7 @@ export const BKND_CONSTANTS = {
    * This is the path to the .env file
    * If not provided, defaults to the root directory ('.env' file in the same directory as the script).
    */
-  envFilePath: process.env.ENV_FILE || '.env',
+  envFilePath: '.env',
 
   /**
    * Swagger state.
