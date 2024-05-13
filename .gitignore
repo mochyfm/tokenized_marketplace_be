@@ -63,3 +63,4 @@ cache
 build
 artifacts
 .deps
+remix-compiler.*
