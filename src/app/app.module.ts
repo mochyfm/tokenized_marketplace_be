@@ -7,7 +7,6 @@ import {
 import { AuthModule } from './auth/auth.module';
 import { BlockchainModule } from './blockchain/blockchain.module';
 import { UsersModule } from './users/users.module';
-import { DatabaseModule } from './database/database.module';
 import { StatusModule } from './status/status.module';
 import { AuthMiddleware } from 'src/middlewares/global/auth/auth.middleware';
 import { JwtModule } from '@nestjs/jwt';
@@ -15,10 +14,18 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { BKND_CONSTANTS } from 'src/constants/backend.constants';
 import { JWT_CONSTANTS } from 'src/constants/security.constants';
 import { HeaderMiddleware } from 'src/middlewares/global/header.middleware';
+import { MongooseModule } from '@nestjs/mongoose';
+import { DATABSE_CONSTANTS } from 'src/constants/database.constants';
 import { UtilsModule } from 'src/utils/utils.module';
 
 @Module({
   imports: [
+    MongooseModule.forRoot(
+      `mongodb://${DATABSE_CONSTANTS.host}/${DATABSE_CONSTANTS.name}`,
+      {
+        autoCreate: true,
+      },
+    ),
     JwtModule.register({
       secret: JWT_CONSTANTS.secretKey,
       signOptions: { expiresIn: JWT_CONSTANTS.expirationTime },
@@ -26,10 +33,9 @@ import { UtilsModule } from 'src/utils/utils.module';
     AuthModule,
     BlockchainModule,
     UsersModule,
-    DatabaseModule,
     StatusModule,
-    UtilsModule,
     SwaggerModule,
+    UtilsModule,
   ],
 })
 export class AppModule {
