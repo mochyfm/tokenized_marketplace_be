@@ -43,13 +43,16 @@ El proyecto está dividido por carpetas, según funcionalidad. A continuación u
 
 Para entender la estructura del proyecto deberemos primero entender los componentes que la estructuran. En Nest, el funcionamiento es similar al que se tiene en Angular, cada elemento es un Modulo y de ahí cada uno de ellos tiene su estructura independiente.
 
-| Parent    | Child            |
+| Módulo    | Componente       |
 | --------- | ---------------- |
-| AppModule | AuthModule       |
+| AppModule | MongooseModule   |
+|           | JwtModule        |
+|           | AuthModule       |
 |           | BlockchainModule |
 |           | UsersModule      |
-|           | DatabaseModule   |
 |           | StatusModule     |
+|           | SwaggerModule    |
+|           | UtilsModule      |
 
 Aquí se reflejarán todos los módulos independientes. Para ver la estructura completa, ve al diagrama.
 
@@ -71,3 +74,31 @@ Cada módulo sigue una estructura, teniendo (o no) las siguientes subcarpetas y 
 | entity     | Carpeta para la gestión de entidades                                                 |
 
 Dentro de cada una, habrá los elementos mencionados y **siempre debe acompañarle un archivo de test**. Los tests se realizan con vitest.
+
+## Variables de Entorno
+
+### Configuración del Backend
+
+- `BACKEND_IP`: Dirección IP del backend. Por defecto es *'127.0.0.1'*.
+- `BACKEND_PORT`: Puerto del backend. Por defecto es *7543*.
+- `SWAGGER`: Estado de Swagger. Habilita o deshabilita Swagger. Por defecto es *false*.
+- `SWAGGER_ENDPOINT`: Punto final de Swagger. Por defecto es *'swagger-dev'*.
+
+### Configuración de Blockchain
+
+- `RPC_PROV_PROTOCOL`: Protocolo del proveedor RPC. Por defecto es *'http'*.
+- `RPC_PROV_IP`: Dirección IP del proveedor RPC. Por defecto es *'127.0.0.1'*.
+- `RPC_PROV_PORT`: Puerto del proveedor RPC. Por defecto es *8545*.
+
+### Configuración de la Base de Datos
+
+- `DB_HOST`: Nombre del host del servidor de la base de datos. Por defecto es *'localhost'*.
+- `DB_NAME`: Nombre del elemento al que conectarse (por ejemplo, base de datos, tabla). Por defecto es *'tokenized_marketplace'*.
+- `DB_PORT`: Puerto del contenedor de MongoDB. Por defecto es *27017*.
+- `DB_USERNAME`: Nombre de usuario para la autenticación. Por defecto es *'enpower'*.
+- `DB_PASSWORD`: Contraseña para la autenticación. Por defecto es *'Test1234!'*.
+
+### Configuración de Autenticación JWT
+
+- `JWT_EXPIRATION_TIME`: Tiempo de expiración del JWT (en segundos). Por defecto es *3600* (1 hora).
+- `JWT_SECRET`: Clave secreta JWT.
