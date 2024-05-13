@@ -43,11 +43,14 @@ To understand the structure of the project, we must first understand the compone
 
 | Parent    | Child            |
 | --------- | ---------------- |
-| AppModule | AuthModule       |
+| AppModule | MongooseModule   |
+|           | JwtModule        |
+|           | AuthModule       |
 |           | BlockchainModule |
 |           | UsersModule      |
-|           | DatabaseModule   |
 |           | StatusModule     |
+|           | SwaggerModule    |
+|           | UtilsModule      |
 
 Here all independent modules will be reflected. To see the complete structure, go to the diagram.
 
@@ -73,17 +76,20 @@ Within each one, there will be the mentioned elements and **a test file must alw
 ## Environment Variables
 
 ### Backend Configuration
+
 - `BACKEND_IP`: Backend IP address. Defaults to *'127.0.0.1'*.
 - `BACKEND_PORT`: Backend port. Defaults to *7543*.
 - `SWAGGER`: Swagger state. Enables or disables swagger. Defaults to *false*.
 - `SWAGGER_ENDPOINT`: Swagger endpoint. Defaults to *'swagger-dev'*.
 
 ### Blockchain Configuration
+
 - `RPC_PROV_PROTOCOL`: RPC provider protocol. Defaults to *'http'*.
 - `RPC_PROV_IP`: RPC provider IP address. Defaults to *'127.0.0.1'*.
 - `RPC_PROV_PORT`: RPC provider port. Defaults to *8545*.
 
 ### Database Configuration
+
 - `DB_HOST`: Hostname of the database server. Defaults to *'localhost'*.
 - `DB_NAME`: Name of the element to connect to (e.g., database, table). Defaults to *'tokenized_marketplace'*.
 - `DB_PORT`: Port of the MongoDB container. Defaults to *27017*.
@@ -91,5 +97,6 @@ Within each one, there will be the mentioned elements and **a test file must alw
 - `DB_PASSWORD`: Password for authentication. Defaults to *'Test1234!'*.
 
 ### JWT Authentication Configuration
+
 - `JWT_EXPIRATION_TIME`: JWT expiration time (in seconds). Defaults to *3600* (1 hour).
 - `JWT_SECRET`: JWT secret key.
